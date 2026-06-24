@@ -207,7 +207,7 @@ Dashboard
 
 
 Repository Contents
-
+```
 sql/
 ├── data_cleaning.sql
 ├── customer_summary.sql
@@ -224,7 +224,7 @@ data/
 ├── customer_summary.csv
 
 README.md
-
+```
 ⸻
 
 Tools & Technologies
