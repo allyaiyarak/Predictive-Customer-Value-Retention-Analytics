@@ -1,0 +1,105 @@
+-- =====================================================
+
+-- DATA QUALITY CHECKS
+
+-- =====================================================
+
+SELECT COUNT(*) AS total_rows
+
+FROM "Online Retail";
+
+SELECT COUNT(*) AS missing_customers
+
+FROM "Online Retail"
+
+WHERE CustomerID IS NULL;
+
+SELECT COUNT(*) AS returns
+
+FROM "Online Retail"
+
+WHERE Quantity < 0;
+
+SELECT
+
+    MIN(InvoiceDate) AS first_date,
+
+    MAX(InvoiceDate) AS last_date
+
+FROM "Online Retail";
+
+-- =====================================================
+
+-- DATA CLEANING
+
+-- =====================================================
+
+CREATE TABLE retail_clean AS
+
+SELECT *
+
+FROM "Online Retail"
+
+WHERE CustomerID IS NOT NULL
+
+  AND Quantity > 0
+
+  AND UnitPrice > 0;
+
+-- =====================================================
+
+-- CUSTOMER LEVEL AGGREGATION
+
+-- =====================================================
+
+CREATE TABLE customer_summary AS
+
+SELECT
+
+    CustomerID,
+
+    SUM(Quantity * UnitPrice) AS TotalRevenue,
+
+    COUNT(DISTINCT InvoiceNo) AS Orders,
+
+    MAX(InvoiceDate) AS LastPurchaseDate
+
+FROM retail_clean
+
+GROUP BY CustomerID;
+
+-- =====================================================
+
+-- FEATURE ENGINEERING
+
+-- =====================================================
+
+ALTER TABLE customer_summary
+
+ADD COLUMN AvgOrderValue REAL;
+
+UPDATE customer_summary
+
+SET AvgOrderValue = TotalRevenue / Orders;
+
+-- =====================================================
+
+-- EXPLORATORY ANALYSIS
+
+-- =====================================================
+
+SELECT *
+
+FROM customer_summary
+
+ORDER BY TotalRevenue DESC
+
+LIMIT 10;
+
+SELECT
+
+    ROUND(AVG(TotalRevenue),2) AS AvgRevenue,
+
+    ROUND(AVG(Orders),2) AS AvgOrders
+
+FROM customer_summary;
