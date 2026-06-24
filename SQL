@@ -1,8 +1,4 @@
--- =====================================================
-
 -- DATA QUALITY CHECKS
-
--- =====================================================
 
 SELECT COUNT(*) AS total_rows
 
@@ -28,11 +24,7 @@ SELECT
 
 FROM "Online Retail";
 
--- =====================================================
-
 -- DATA CLEANING
-
--- =====================================================
 
 CREATE TABLE retail_clean AS
 
@@ -46,11 +38,8 @@ WHERE CustomerID IS NOT NULL
 
   AND UnitPrice > 0;
 
--- =====================================================
 
 -- CUSTOMER LEVEL AGGREGATION
-
--- =====================================================
 
 CREATE TABLE customer_summary AS
 
@@ -68,11 +57,7 @@ FROM retail_clean
 
 GROUP BY CustomerID;
 
--- =====================================================
-
 -- FEATURE ENGINEERING
-
--- =====================================================
 
 ALTER TABLE customer_summary
 
@@ -82,11 +67,7 @@ UPDATE customer_summary
 
 SET AvgOrderValue = TotalRevenue / Orders;
 
--- =====================================================
-
 -- EXPLORATORY ANALYSIS
-
--- =====================================================
 
 SELECT *
 
