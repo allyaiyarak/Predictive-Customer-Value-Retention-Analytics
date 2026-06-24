@@ -20,7 +20,7 @@ The analysis follows an end-to-end customer analytics workflow:
 
 Dataset Used
 
-Online Retail Dataset (UCI Machine Learning Repository)
+Online Retail Dataset (UCI Machine Learning Repository)[https://archive.ics.uci.edu/dataset/352/online+retail]
 
 This dataset contains transactional records from a UK-based online retailer between December 2010 and December 2011.
 
@@ -208,22 +208,13 @@ Dashboard
 
 Repository Contents
 ```
-sql/
-├── data_cleaning.sql
-├── customer_summary.sql
+customer-lifetime-value-retention-analytics/
 
-python/
-├── rfm_segmentation.ipynb
-├── clv_modelling.ipynb
+├── SQL/
 
-tableau/
-├── dashboard_screenshots/
-├── tableau_public_link.txt
+├── Python/
 
-data/
-├── customer_summary.csv
-
-README.md
+├── README.md
 ```
 ⸻
 
@@ -233,7 +224,6 @@ Tools & Technologies
 * Python
     * pandas
     * numpy
-    * lifetimes
-    * matplotlib
+    * lifetimes (BG/NBD & Gamma-Gamma Models)
 * Tableau
 * Jupyter Notebook
